@@ -7,7 +7,6 @@ from os import getenv
 storage = getenv('HBNB_TYPE_STORAGE')
 
 
-
 class Amenity(BaseModel, Base):
     __tablename__ = 'amenities'
     if storage == 'db':
