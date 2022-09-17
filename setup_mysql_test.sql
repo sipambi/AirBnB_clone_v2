@@ -8,3 +8,4 @@ CREATE USER IF NOT EXISTS 'hbnb_test'@'localhost'
 GRANT ALL PRIVILEGES ON hbnb_test_db.* TO 'hbnb_test'@'localhost';
 
 GRANT SELECT ON perforance_schema.* TO ' hbnb_test'@'localhost';
+FLUSH PRIVILEGES;
