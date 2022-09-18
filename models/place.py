@@ -8,6 +8,7 @@ from sqlalchemy.sql.schema import Table
 from sqlalchemy.orm import relationship
 from os import getenv
 
+
 storage = getenv('HBNB_TYPE_STORAGE')
 
 if storage == 'db':
@@ -21,6 +22,7 @@ if storage == 'db':
                                  primary_key=True,
                                  nullable=False)
                           )
+
 
 class Place(BaseModel, Base):
     """ A place to stay """
@@ -54,39 +56,39 @@ class Place(BaseModel, Base):
 
     @property
     def reviews(self):
-            ''' returns list of review instances with place_id
-                equals to the cyrrent Place.id
-                FileStorage relationship between Place and Review
-            '''
-            from models import storage
-            all_revs = storage.all(Review)
-            temp_list = []
-            for rev in all_revs.values():
-                if rev.place_id == self.id:
-                    temp_list.append(rev)
-            return temp_list
+        ''' returns list of review instances with place_id
+            equals to the cyrrent Place.id
+            FileStorage relationship between Place and Review
+        '''
+        from models import storage
+        all_revs = storage.all(Review)
+        temp_list = []
+        for rev in all_revs.values():
+            if rev.place_id == self.id:
+                temp_list.append(rev)
+        return temp_list
 
     @property
     def amenities(self):
-            ''' returns the list of Amenity instances
-                based on the attribute amenity_ids that
-                contains all Amenity.id linked to the Place
-            '''
-            from models import storage
-            all_amens = storage.all(Amenity)
-            temp_list = []
-            for amen in all_amens.values():
-                if amen.id in self.amenity_ids:
-                    temp_list.append(amen)
-            return temp_list
+        ''' returns the list of Amenity instances
+            based on the attribute amenity_ids that
+            contains all Amenity.id linked to the Place
+        '''
+        from models import storage
+        all_amens = storage.all(Amenity)
+        temp_list = []
+        for amen in all_amens.values():
+            if amen.id in self.amenity_ids:
+                temp_list.append(amen)
+        return temp_list
 
     @amenities.setter
     def amenities(self, obj):
-            ''' method for adding an Amenity.id to the
-                attribute amenity_ids. accepts only Amenity
-                objects
-            '''
-            if obj is not None:
-                if isinstance(obj, Amenity):
-                    if obj.id not in self.amenity_ids:
-                        self.amenity_ids.append(obj.id)
+        ''' method for adding an Amenity.id to the
+            attribute amenity_ids. accepts only Amenity
+            objects
+        '''
+        if obj is not None:
+            if isinstance(obj, Amenity):
+                if obj.id not in self.amenity_ids:
+                    self.amenity_ids.append(obj.id)
