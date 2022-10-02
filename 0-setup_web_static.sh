@@ -19,6 +19,7 @@ printf %s "server {
     root   /var/www/html;
     index  index.html index.htm;
     location /hbnb_static {
+<<<<<<< HEAD
     	alias /data/web_static/current;
 	index index.html index.htm;
     }
@@ -30,6 +31,18 @@ printf %s "server {
     location /404 {
         root /var/www/html;
 	internal;
+=======
+        alias /data/web_static/current;
+        index index.html index.htm;
+    }
+    location /redirect_me {
+        return 301 http://cuberule.com/;
+    }
+    error_page 404 /404.html;
+    location /404 {
+      root /var/www/html;
+      internal;
+>>>>>>> f1dcf33c1eebd98f3d390e216ef8195d73b0f26f
     }
 }" > /etc/nginx/sites-available/default
 
